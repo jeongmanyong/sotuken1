@@ -1,4 +1,4 @@
-const itemsPerPage = 4; // 1ページに表示するアイテム数
+const itemsPerPage = 6; // 1ページに表示するアイテム数
 let currentContent = []; // 現在表示されているコンテンツを保持
 
 const pageContents = [

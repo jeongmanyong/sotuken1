@@ -4,7 +4,7 @@ let currentContent = []; // 現在表示されているコンテンツを保持
 const pageContents = [
     [
         {
-            imgSrc: "/api/placeholder/400/150",
+            imgSrc: "./algebra/algebra.png", // 代数のアイコン画像パスに変更
             alt: "代数",
             title: "代数",
             description: "数と文字を使った数式による表現",

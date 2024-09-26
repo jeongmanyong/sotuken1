@@ -11,18 +11,18 @@ header {
     text-align: center;
 }
 
+/* MathPass のリンクスタイル修正 */
 header h1 a {
     text-decoration: none; /* 下線を消す */
     color: inherit; /* 親要素の色を引き継ぐ */
-    outline: none; /* クリック時の青い枠を消す */
+    cursor: pointer; /* カーソルがリンクに変更される */
 }
 
-header h1 a:focus {
-    outline: none; /* フォーカス時の青い枠を消す */
-}
-
-header h1 a:hover {
-    color: #007bff; /* ホバー時に色を変更 */
+header h1 a:hover,
+header h1 a:focus,
+header h1 a:visited {
+    color: inherit; /* リンクの色を変更しない */
+    text-decoration: none; /* ホバー時やフォーカス時も下線を表示しない */
 }
 
 .container {
@@ -54,17 +54,12 @@ header h1 a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-decoration: none; /* クリック時に青くならないように */
     color: inherit; /* 文字の色を親要素に合わせる */
-    user-select: none; /* テキスト選択を無効化 */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* 動きを追加 */
 }
 
 .grid-item a {
     text-decoration: none; /* リンクの青色と下線を無効化 */
     color: inherit; /* リンクの文字色も親要素に合わせる */
-    outline: none; /* クリック時の青い枠を消す */
-}
-
-.grid-item a:focus {
-    outline: none; /* フォーカス時の青い枠を消す */
 }
 
 .grid-item img {
@@ -88,6 +83,13 @@ header h1 a:hover {
 .grid-item-content p:last-child {
     text-align: right;
     margin-top: 25px; /* 最終更新日の上に余白を増加 */
+}
+
+/* マウスを持ってきた際に強調するスタイル */
+.grid-item:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 影を強調 */
+    transform: translateY(-5px); /* 持ち上げるように見せる */
+    background-color: #f9f9f9; /* 背景色を少し変更 */
 }
 
 /* タグを四角で囲むスタイル */
@@ -116,6 +118,24 @@ header h1 a:hover {
     border-radius: 5px;
     padding: 15px;
     margin-bottom: 20px;
+}
+
+.tag-search a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background-color: #e6e6fa;
+    color: #007bff;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tag-search a:hover {
+    background-color: #007bff;
+    color: white;
 }
 
 .last-updated {

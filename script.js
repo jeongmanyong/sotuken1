@@ -1,5 +1,6 @@
 const itemsPerPage = 4; // 1ページに表示するアイテム数
-let currentContent = []; // 現在表示されているコンテンツを保持
+let currentContent = []; // 現在表示しているコンテンツを保持
+let selectedTags = []; // 選択されたタグを保持する配列
 
 const pageContents = [
     [
@@ -139,7 +140,9 @@ function generatePageContent(content, pageNumber) {
     const contentToShow = content.slice(startIndex, endIndex); // 現在のページに表示するコンテンツを取得
 
     contentToShow.forEach(item => {
-        const tagsHTML = item.tags.map(tag => `<span class="tag" onclick="handleTagClick(event, '${tag}')">${tag}</span>`).join('');
+        const tagsHTML = item.tags.map(tag => 
+            `<span class="tag" onclick="handleTagClick(event)">${tag}</span>`
+        ).join('');
         const gridItem = `
             <div class="grid-item">
                 <a href="${item.link}">
@@ -177,10 +180,44 @@ function generateTagList() {
 
 // タグでフィルタリングされたコンテンツを生成する関数
 function generateFilteredContent(tag) {
-    const filteredContent = currentContent.filter(item => item.tags.includes(tag));
+    if (!selectedTags.includes(tag)) {
+        selectedTags.push(tag); // タグが既に選択されていない場合のみ追加
+    }
+    filterAndDisplayContent(); // フィルタリングと表示を実行
+}
+// 選択されたタグを削除する関数
+function removeTag(tag) {
+    selectedTags = selectedTags.filter(selectedTag => selectedTag !== tag); // タグを削除
+    filterAndDisplayContent(); // フィルタリングと表示を実行
+}
+
+// 選択されたタグを表示し、フィルタリングを行う関数
+function filterAndDisplayContent() {
+    const filteredContent = pageContents.flat().filter(item =>
+        selectedTags.every(selectedTag => item.tags.includes(selectedTag))
+    );
+    
     generatePageContent(filteredContent, 1); // 1ページ目の結果を表示
     generatePagination(filteredContent, 1); // フィルタ結果に基づいてページネーションを生成
+    displaySelectedTags(); // 選択されたタグを表示
 }
+
+// 選択されたタグを解説ページの上に表示する関数
+function displaySelectedTags() {
+    const selectedTagElement = document.getElementById('selected-tags');
+    
+    if (selectedTags.length === 0) {
+        selectedTagElement.style.display = 'none'; // タグが選択されていない場合は非表示
+        return;
+    }
+
+    selectedTagElement.style.display = 'block'; // タグがある場合は表示
+    const tagsHTML = selectedTags.map(tag => 
+        `<span class="tag"><span class="remove-tag" onclick="removeTag('${tag}')">×</span>${tag}</span>`
+    ).join(' ');
+    selectedTagElement.innerHTML = `選択されたタグ: ${tagsHTML}`;
+}
+
 
 // サイト内検索
 function handleSearch(event) {

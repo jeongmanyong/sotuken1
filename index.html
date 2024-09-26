@@ -8,21 +8,19 @@
 </head>
 <body>
     <header>
-        <h1><a href="index.html">MathPass</a></h1>
+        <h1><a href="/">MathPass</a></h1>
         <p>このサイトでは、数学の基礎から応用までをカバーします。</p>
     </header>
 
     <div class="container">
         <main class="main-content">
-            <div class="last-updated">
-                <p>最終更新日: 2024年3月28日</p>
-            </div>
             <h2>解説ページ</h2>
-            <!-- 動的にコンテンツが挿入される場所 -->
+
+            <!-- タグ検索で選択されたタグを表示する要素 -->
+            <div id="selected-tags" class="selected-tags"></div>
+
             <div class="grid"></div>
-            <div class="pagination" id="pagination">
-                <!-- ページネーションはJavaScriptで動的に生成されます -->
-            </div>
+            <div class="pagination" id="pagination"></div>
         </main>
 
         <aside class="sidebar">
@@ -32,11 +30,13 @@
                 <input type="text" placeholder="検索キーワードを入力">
                 <button>検索</button>
             </div>
+
             <!-- タグ検索 -->
             <div class="tag-search">
                 <h3>タグ検索</h3>
                 <!-- タグリストはJavaScriptによって動的に生成されます -->
             </div>
+
             <div class="links">
                 <h3>リンク集</h3>
                 <ul>
